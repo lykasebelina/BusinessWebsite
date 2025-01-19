@@ -3,123 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clothing Business</title>
+    <title>The Wardrobe Co.</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
         }
         header {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-        }
-        header .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
             display: flex;
-            justify-content: flex-end;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        .hero {
-            background-image: url('clothing-banner.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            color: white;
-            display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            position: relative; /* Ensures title can be positioned absolutely */
+            background-color: white;
+            color: black;
+            padding: 20px 40px;
+            height: 80px;
+        }
+        .logo {
+            width: 70px;
+            height: auto;
+        }
+        .title {
+            position: absolute;
+            left: 16%; /* Start at 50% of the container */
+            transform: translateX(-50%); /* Shift back by half of the title's width */
+            font-size: 24px;
+            font-weight: bold;
             text-align: center;
         }
-        .hero h1 {
-            font-size: 3em;
-        }
-        .section {
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .products {
+        nav {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            gap: 20px;
         }
-        .product {
-            flex: 1;
-            margin: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        nav a {
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: graytext;
             border-radius: 5px;
         }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
+        .center-section {
+            display: flex;
+            position: absolute;
+            left: 30%;
+            gap: 20px;
+        }
+        
+        .right-section {
+            display: flex;
+            position: absolute;
+            left: 75%;
+            gap: 20px;
+        }
+        
+        .search-bar input {
+            padding: 10px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: 1px solid black; /* Adds a blue outline */
+            transition: outline-color 0.3s; /* Smooth transition for outline color */
+        }
+
+        .search-bar input:focus {
+            outline-color: #FF5733; /* Changes outline color to orange when focused */
+        }
+        
+        .icon {
+            cursor: pointer;
+        }
+        
+        .icon-profile {
+            position: absolute;
+            padding: 3px;
+            left: 105%;
+            width: 35px;
+            height: 35px;
+            
+        }
+        
+        .icon-cart {
+            position: absolute;
+            padding: -1px;
+            left: 125%;
+            width: 40px;
+            height: 40px;
+            
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">Clothing Business</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h1>Welcome to Our Clothing Store</h1>
-        <p>Style that speaks for you</p>
-    </section>
-
-    <section class="section" id="about">
-        <h2>About Us</h2>
-        <p>We offer a wide range of trendy and affordable clothing for all occasions.</p>
-    </section>
-
-    <section class="section" id="products">
-        <h2>Our Products</h2>
-        <div class="products">
-            <div class="product">
-                <h3>Casual Wear</h3>
-                <p>Comfortable and stylish outfits for your everyday look.</p>
-            </div>
-            <div class="product">
-                <h3>Formal Attire</h3>
-                <p>Elegant clothing for office wear and special events.</p>
-            </div>
-            <div class="product">
-                <h3>Accessories</h3>
-                <p>Complete your outfit with our unique accessories.</p>
-            </div>
+        <!-- Left Side: Logo -->
+        <div class="left-section">
+            <img src="logo.jpg" alt="The Wardrobe Co. Logo" class="logo">
         </div>
-    </section>
 
-    <section class="section" id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: info@clothingbusiness.com</p>
-        <p>Phone: (123) 456-7890</p>
-    </section>
+        <!-- Center: Title -->
+        <span class="title">The Wardrobe Co.</span>
 
-    <footer>
-        <p>&copy; 2025 Clothing Business. All rights reserved.</p>
-    </footer>
+        <!-- Right Side: Menu Navigation, Search, Profile, Cart Icons -->
+        <div class="center-section">
+            <nav>
+                <a href="#home">HOME</a>
+                <a href="#shop">SHOP</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+                <a href="#support">SUPPORT</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+         </div>
+        
+        <div class="right-section">
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <img src="profile.png" alt="Profile" class="icon icon-profile">
+            <img src="cart.png" alt="Cart" class="icon icon-cart">
+        </div>
+    </header>
+    
+    
+    
 </body>
 </html>
