@@ -16,7 +16,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative; /* Ensures title can be positioned absolutely */
+            position: relative;
             background-color: white;
             color: black;
             padding: 20px 40px;
@@ -28,8 +28,8 @@
         }
         .title {
             position: absolute;
-            left: 16%; /* Start at 50% of the container */
-            transform: translateX(-50%); /* Shift back by half of the title's width */
+            left: 16%;
+            transform: translateX(-50%);
             font-size: 24px;
             font-weight: bold;
             text-align: center;
@@ -52,50 +52,60 @@
         .center-section {
             display: flex;
             position: absolute;
-            left: 30%;
+            left: 40%;
             gap: 20px;
         }
         
         .right-section {
-            display: flex;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end; /* Align icons to the far right */
+    width: 300px; /* Ensure enough space for icons and the search bar */
+}
+
+        .search-bar {
             position: absolute;
-            left: 75%;
-            gap: 20px;
-        }
-        
+    right: 120px; /* Keep the search bar aligned with the right side of the parent */
+    top: 50%; /* Vertically center */
+    transform: translateY(-50%);
+    width: 0; /* Initially hidden */
+    overflow: visible; /* Ensure no part of the bar is clipped */
+    display: none;
+    transition: width 0.3s ease; /* Smoothly expand */
+}
+
         .search-bar input {
-            padding: 10px 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            outline: 1px solid black; /* Adds a blue outline */
-            transition: outline-color 0.3s; /* Smooth transition for outline color */
+            padding: 10px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%; /* Take the full width of the container */
+}
+
+        .search-bar.expanded {
+            display: block;
+            width: 200px; /* Final width of the search bar */
         }
 
-        .search-bar input:focus {
-            outline-color: #FF5733; /* Changes outline color to orange when focused */
-        }
-        
         .icon {
             cursor: pointer;
         }
-        
+
+        .icon-search {
+            width: 33px;
+            height: 33px;
+        }
+
         .icon-profile {
-            position: absolute;
-            padding: 3px;
-            left: 105%;
             width: 35px;
             height: 35px;
-            
         }
-        
+
         .icon-cart {
-            position: absolute;
-            padding: -1px;
-            left: 125%;
             width: 40px;
             height: 40px;
-            
         }
     </style>
 </head>
@@ -116,22 +126,32 @@
                 <a href="#shop">SHOP</a>
                 <a href="#about">ABOUT</a>
                 <a href="#contact">CONTACT</a>
-                <a href="#support">SUPPORT</a>
-                <a href="#faq">FAQ</a>
+                
             </nav>
-         </div>
+        </div>
         
         <div class="right-section">
-            
-            <div class="search-bar">
+            <!-- Search Icon -->
+            <img src="images/search.png" alt="Search" class="icon icon-search" id="search-icon">
+            <!-- Search Bar -->
+            <div class="search-bar" id="search-bar">
                 <input type="text" placeholder="Search...">
             </div>
+            <!-- Profile Icon -->
             <img src="images/profile.png" alt="Profile" class="icon icon-profile">
+            <!-- Cart Icon -->
             <img src="images/cart.png" alt="Cart" class="icon icon-cart">
         </div>
     </header>
-    
-    
-    
+
+    <script>
+        const searchIcon = document.getElementById("search-icon");
+        const searchBar = document.getElementById("search-bar");
+
+        searchIcon.addEventListener("click", () => {
+            searchIcon.style.display = "none"; // Hide the search icon
+            searchBar.classList.add("expanded"); // Expand the search bar
+        });
+    </script>
 </body>
 </html>
