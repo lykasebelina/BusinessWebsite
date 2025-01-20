@@ -55,102 +55,121 @@
             left: 40%;
             gap: 20px;
         }
-        
         .right-section {
-    position: relative;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-end; /* Align icons to the far right */
-    width: 300px; /* Ensure enough space for icons and the search bar */
-}
-
+            position: relative;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-end;
+            width: 300px;
+        }
         .search-bar {
             position: absolute;
-    right: 120px; /* Keep the search bar aligned with the right side of the parent */
-    top: 50%; /* Vertically center */
-    transform: translateY(-50%);
-    width: 0; /* Initially hidden */
-    overflow: visible; /* Ensure no part of the bar is clipped */
-    display: none;
-    transition: width 0.3s ease; /* Smoothly expand */
-}
-
-        .search-bar input {
-            padding: 10px;
-    font-size: 16px;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 100%; /* Take the full width of the container */
-}
-
+            right: 120px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            overflow: visible;
+            display: none;
+            transition: width 0.3s ease;
+        }
         .search-bar.expanded {
             display: block;
-            width: 200px; /* Final width of the search bar */
+            width: 200px;
         }
-
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 100%;
+        }
         .icon {
             cursor: pointer;
         }
-
         .icon-search {
             width: 33px;
             height: 33px;
         }
-
         .icon-profile {
             width: 35px;
             height: 35px;
         }
-
         .icon-cart {
             width: 40px;
             height: 40px;
         }
+
+        /* Hero Banner */
+        .hero-banner {
+            background-image: url('images/herobanner.png');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Additional Image Section */
+        .services-image {
+    background-image: url('images/services.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px; /* Adjust this value to move the section lower */
+}
     </style>
 </head>
 <body>
     <header>
-        <!-- Left Side: Logo -->
         <div class="left-section">
             <img src="images/logo.jpg" alt="The Wardrobe Co. Logo" class="logo">
         </div>
 
-        <!-- Center: Title -->
         <span class="title">The Wardrobe Co.</span>
 
-        <!-- Right Side: Menu Navigation, Search, Profile, Cart Icons -->
         <div class="center-section">
             <nav>
                 <a href="#home">HOME</a>
                 <a href="#shop">SHOP</a>
                 <a href="#about">ABOUT</a>
                 <a href="#contact">CONTACT</a>
-                
             </nav>
         </div>
         
         <div class="right-section">
-            <!-- Search Icon -->
             <img src="images/search.png" alt="Search" class="icon icon-search" id="search-icon">
-            <!-- Search Bar -->
             <div class="search-bar" id="search-bar">
                 <input type="text" placeholder="Search...">
             </div>
-            <!-- Profile Icon -->
             <img src="images/profile.png" alt="Profile" class="icon icon-profile">
-            <!-- Cart Icon -->
             <img src="images/cart.png" alt="Cart" class="icon icon-cart">
         </div>
     </header>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+        <!-- Empty hero banner for visual impact -->
+    </section>
+
+    <!-- Additional Image Section -->
+    <section class="services-image">
+        <!-- Empty section with additional background image -->
+    </section>
 
     <script>
         const searchIcon = document.getElementById("search-icon");
         const searchBar = document.getElementById("search-bar");
 
         searchIcon.addEventListener("click", () => {
-            searchIcon.style.display = "none"; // Hide the search icon
-            searchBar.classList.add("expanded"); // Expand the search bar
+            searchIcon.style.display = "none";
+            searchBar.classList.add("expanded");
         });
     </script>
 </body>
