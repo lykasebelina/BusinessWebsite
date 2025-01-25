@@ -3,302 +3,721 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wardrobe Co.</title>
+    <title>Shop Website</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f4f4f4;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            background-color: white;
-            color: black;
-            padding: 20px 40px;
-            height: 80px;
-        }
-        .logo {
-            width: 70px;
-            height: auto;
-        }
-        .title {
-            position: absolute;
-            left: 16%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            font-weight: bold;
+            background: #ff6f61;
+            color: #fff;
+            padding: 10px 20px;
             text-align: center;
         }
-        nav {
-            display: flex;
-            gap: 20px;
-        }
-        nav a {
-            color: black;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            background-color: graytext;
-            border-radius: 5px;
-        }
-        .center-section {
-            display: flex;
-            position: absolute;
-            left: 40%;
-            gap: 20px;
-        }
-        .right-section {
-            position: relative;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            justify-content: flex-end;
-            width: 300px;
-        }
-        .search-bar {
-            position: absolute;
-            right: 120px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            overflow: visible;
-            display: none;
-            transition: width 0.3s ease;
-        }
-        .search-bar.expanded {
-            display: block;
-            width: 200px;
-        }
-        .search-bar input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid black;
-            border-radius: 5px;
-            width: 100%;
-        }
-        .icon {
-            cursor: pointer;
-        }
-        .icon-search {
-            width: 33px;
-            height: 33px;
-        }
-        .icon-profile {
-            width: 35px;
-            height: 35px;
-        }
-        .icon-cart {
-            width: 40px;
-            height: 40px;
-        }
-        .product-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 100px 20px 20px;
+
+        header h1 {
+            font-size: 2rem;
         }
 
-        .product {
-            background-color: white;
-            border-radius: 8px;
+        .best-sellers {
             padding: 20px;
-            text-align: center;
-            width: 200px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
         }
 
-        .product img {
+        .best-sellers h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .best-sellers p {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .product-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
         }
 
-        .product h3 {
-            font-size: 18px;
+        .product-card h3 {
+            font-size: 1.2rem;
             margin: 10px 0;
         }
 
-        .product p {
-            font-size: 16px;
-            color: #777;
-            margin: 5px 0;
+        .product-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 10px;
         }
 
-        .product button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
+        .product-card .price {
+            font-size: 1rem;
+            color: #ff6f61;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .product-card .stock {
+            font-size: 0.9rem;
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .product-card .reviews {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .product-card .rating {
+            margin-bottom: 10px;
+            color: #ffb400;
+        }
+
+        .product-card button {
+            background: #ff6f61;
+            color: #fff;
             border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
             border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .product button:hover {
-            background-color: #218838;
+        .product-card button:hover {
+            background: #e6554e;
         }
 
-        /* Cart Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: white;
+        footer {
+            background: #333;
+            color: #fff;
             padding: 20px;
-            margin: 15% auto;
-            width: 50%;
-            border-radius: 8px;
-            position: relative;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 30px;
-            cursor: pointer;
+        footer div {
+            flex: 1;
+            margin: 10px;
+        }
+
+        footer h3 {
+            margin-bottom: 10px;
+        }
+
+        footer p, footer ul {
+            font-size: 0.9rem;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="left-section">
-            <img src="images/logo.jpg" alt="The Wardrobe Co. Logo" class="logo">
-        </div>
 
-        <span class="title">The Wardrobe Co.</span>
+<header>
+    <h1>Shop Like Never Before!</h1>
+</header>
 
-        <div class="center-section">
-            <nav>
-                <a href="index.html">HOME</a>
-                <a href="shop.html">SHOP</a>
-                <a href="about.html">ABOUT</a>
-                <a href="#contact">CONTACT</a>
-            </nav>
-        </div>
-        
-        <div class="right-section">
-            <img src="images/search.png" alt="Search" class="icon icon-search" id="search-icon">
-            <div class="search-bar" id="search-bar">
-                <input type="text" placeholder="Search...">
-            </div>
-            <img src="images/profile.png" alt="Profile" class="icon icon-profile">
-            <img src="images/cart.png" alt="Cart" class="icon icon-cart">
-        </div>
-    </header>
+<!-- OUR BEST SELLERS Section -->
+<section class="best-sellers">
+    <h2>OUR BEST SELLERS</h2>
+    <p>Discover our best-selling collection, where style meets quality.</p>
 
-    <section class="product-list">
+    <div class="product-cards">
         <!-- Product 1 -->
-        <div class="product">
-            <img src="dress.jpg">
-            <h3>Red Dress</h3>
-            <p>$25.99</p>
-            <button class="add-to-cart" onclick="addToCart('Red Dress', 25.99)">Add to Cart</button>
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 1">
+            <h3>Product Name 1</h3>
+            <p>High-quality fabric, available in various sizes. Perfect for any occasion.</p>
+            <p class="price">PHP 1,500.00</p>
+            <p class="stock">In Stock</p>
+            <p class="rating">Rating: ★★★★☆</p>
+            <p class="reviews">125 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
         </div>
 
         <!-- Product 2 -->
-        <div class="product">
-            <img src="jeans1.jpg" alt="Jeans 1">
-            <h3>Blue Jeans</h3>
-            <p>$40.00</p>
-            <button class="add-to-cart" onclick="addToCart('Blue Jeans', 40.00)">Add to Cart</button>
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 2">
+            <h3>Product Name 2</h3>
+            <p>Durable and stylish. Includes multiple features for daily use.</p>
+            <p class="price">PHP 2,300.00</p>
+            <p class="stock">Only 5 left in stock</p>
+            <p class="rating">Rating: ★★★☆☆</p>
+            <p class="reviews">54 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
         </div>
 
         <!-- Product 3 -->
-        <div class="product">
-            <img src="dress1.jpg" alt="Dress 1">
-            <h3>Elegant Dress</h3>
-            <p>$55.50</p>
-            <button class="add-to-cart" onclick="addToCart('Elegant Dress', 55.50)">Add to Cart</button>
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
         </div>
-    </section>
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCart()">&times;</span>
-            <h2>Your Cart</h2>
-            <div id="cart-items"></div>
-            <p>Total: $<span id="cart-total">0.00</span></p>
-            <button onclick="purchase()">Proceed to Checkout</button>
+        
+         <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
         </div>
+         
+          <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+          
+           <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+           
+            <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+            
+             <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+             
+              <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+              
+               <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+               
+                <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                
+                 <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                 
+                  <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                  
+                   <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                   
+                    <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                    
+                     <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                     
+                      <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                      
+                       <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                       
+                        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                        
+                         <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                         
+                          <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                           <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                           
+                            <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+         
+                            
+                             <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                             
+                              <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                              
+                               <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                               
+                                <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                
+                                 <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                 
+                                  <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                  
+                                   <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                   
+                                    <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                    
+                                     <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                     
+                                      <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                      
+                                       <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                       
+                                        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                        
+                                         <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                         
+                                          <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                          
+                                           <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                           
+                                            <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                            
+                                             <!-- Product 3 -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p>Elegant design, perfect for gifts or personal use.</p>
+            <p class="price">PHP 850.00</p>
+            <p class="stock">Out of Stock</p>
+            <p class="rating">Rating: ★★★★★</p>
+            <p class="reviews">201 reviews</p>
+            <button>Add to Cart</button>
+            <button>Buy Now</button>
+        </div>
+                          
+                                             
+                                             
+         
+                           
+                           
     </div>
+</section>
 
-    <script>
-        let cart = [];
-        let cartCount = 0;
+<!-- Footer -->
+<footer>
+    <div>
+        <h3>THE WARDROBE CO.</h3>
+        <p>At The Wardrobe Co., we believe that fashion is more than just clothing; it's about expressing individuality and embracing confidence.</p>
+    </div>
+    <div>
+        <h3>SUPPORT</h3>
+        <ul>
+            <li><a href="#">Customer Service</a></li>
+            <li><a href="#">Return & Exchange</a></li>
+            <li><a href="#">Shipping & Delivery</a></li>
+            <li><a href="#">FAQs</a></li>
+        </ul>
+    </div>
+</footer>
 
-        function addToCart(productName, price) {
-            cart.push({ name: productName, price: price });
-            cartCount++;
-            updateCart();
-        }
-
-        function updateCart() {
-            // Update cart count display
-            document.getElementById('cart-count').innerText = cartCount;
-
-            // Update cart items in the modal
-            let cartItems = document.getElementById('cart-items');
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach(item => {
-                let itemElement = document.createElement('p');
-                itemElement.innerText = ${item.name} - $${item.price.toFixed(2)};
-                cartItems.appendChild(itemElement);
-                total += item.price;
-            });
-
-            // Update the total price in the cart modal
-            document.getElementById('cart-total').innerText = total.toFixed(2);
-        }
-
-        function viewCart() {
-            document.getElementById('cart-modal').style.display = 'block';
-        }
-
-        function closeCart() {
-            document.getElementById('cart-modal').style.display = 'none';
-        }
-
-        function purchase() {
-            if (cartCount > 0) {
-                alert('Thank you for your purchase!');
-                cart = [];
-                cartCount = 0;
-                updateCart();
-                closeCart();
-            } else {
-                alert('Your cart is empty!');
-            }
-        }
-    </script>
-
-    <script>
-        const searchIcon = document.getElementById("search-icon");
-        const searchBar = document.getElementById("search-bar");
-
-        searchIcon.addEventListener("click", () => {
-            searchIcon.style.display = "none";
-            searchBar.classList.add("expanded");
-        });
-    </script>
 </body>
 </html>
